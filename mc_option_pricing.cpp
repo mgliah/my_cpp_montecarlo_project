@@ -54,11 +54,12 @@ int main() {
     
     //Calculate the option prices (call and put)
     double callPrice = monteCarloOptionPricer(S0, K, r, sigma, T, numSimulations, true);
-    double putPrice = monteCarloOptionPricer(S0, K, r, sigma, T, numSimulations, true);
+    double putPrice = monteCarloOptionPricer(S0, K, r, sigma, T, numSimulations, false);
 
     //Output
 
     std::cout << "European Call Option Price: " << callPrice << std::endl;
     std::cout << "European Put Option Price: " << putPrice << std::endl;
+
 
 }
