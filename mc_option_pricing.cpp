@@ -45,12 +45,24 @@ double monteCarloOptionPricer(double S0, double K, double r, double sigma, doubl
 
 int main() {
     //Option parameters
-    double S0 = 100.0;          //Initial stock price
-    double K = 100.0;           //Strike price
-    double r = 0.05;            //Risk-free rate
-    double sigma = 0.2;         //Volatility
-    double T = 1;               //Time to maturity (1 year)
-    int numSimulations = 100000;//Number of simulations
+    double S0;          //Initial stock price
+    double K;           //Strike price
+    double r;            //Risk-free rate
+    double sigma;         //Volatility
+    double T;               //Time to maturity (1 year)
+    int numSimulations;//Number of simulations
+    std::cout << "Enter the initial stock price: ";
+    std::cin >> S0;
+    std::cout << "Enter the strike price: ";
+    std::cin >> K;
+    std::cout << "Enter the risk-free rate: ";
+    std::cin >> r;
+    std::cout << "Enter the volatility: ";
+    std::cin >> sigma;
+    std::cout << "Enter the time to maturity in years: ";
+    std::cin >> T;
+    std::cout << "Enter the number of simulations: ";
+    std::cin >> S0;
     
     //Calculate the option prices (call and put)
     double callPrice = monteCarloOptionPricer(S0, K, r, sigma, T, numSimulations, true);
@@ -63,3 +75,4 @@ int main() {
 
 
 }
+
