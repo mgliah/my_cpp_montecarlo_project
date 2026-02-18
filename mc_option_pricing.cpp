@@ -23,10 +23,10 @@ double putOptionPayoff(double S, double K) {
 }
 
 // Monte Carlo Simulation Function
-double monteCarloOptionPricer(double S0, double K, double r, double sigma, double T, int numSimulations, bool isCallOption) {
+double monteCarloOptionPricer(double S0, double K, double r, double sigma, double T, long long numSimulations, bool isCallOption) {
     double payoffSum = 0.0;
 
-    for (int i = 0; i < numSimulations; i++) {
+    for (long long i = 0; i < numSimulations; i++) {
         //Generate random price path -- estimates stock price at the maturity of the option
         //Geometric Brownian motion: Initial price * e^((r - 0.5*sigma^2)T + sigma*sqrt(T)*Z)
         double ST = S0 * std::exp((r - 0.5 * sigma * sigma) * T + sigma * std::sqrt(T) * generateGaussianNoise(0.0, 1.0)); 
@@ -50,7 +50,8 @@ int main() {
     double r;            //Risk-free rate
     double sigma;         //Volatility
     double T;               //Time to maturity (1 year)
-    int numSimulations;//Number of simulations
+    long long numSimulations;//Number of simulations
+    char isCallInput;
     std::cout << "Enter the initial stock price: ";
     std::cin >> S0;
     std::cout << "Enter the strike price: ";
@@ -62,17 +63,20 @@ int main() {
     std::cout << "Enter the time to maturity in years: ";
     std::cin >> T;
     std::cout << "Enter the number of simulations: ";
-    std::cin >> S0;
+    std::cin >> numSimulations;
+    std::cout << "Is it a call option? (y/n): ";
+    std::cin >> isCallInput;
+    bool isCall = (isCallInput == 'y' || isCallInput == 'Y');
     
     //Calculate the option prices (call and put)
-    double callPrice = monteCarloOptionPricer(S0, K, r, sigma, T, numSimulations, true);
-    double putPrice = monteCarloOptionPricer(S0, K, r, sigma, T, numSimulations, false);
+    double callPrice = monteCarloOptionPricer(S0, K, r, sigma, T, numSimulations, isCall);
+    double putPrice = monteCarloOptionPricer(S0, K, r, sigma, T, numSimulations, isCall);
 
     //Output
 
     std::cout << "European Call Option Price: " << callPrice << std::endl;
     std::cout << "European Put Option Price: " << putPrice << std::endl;
 
-
 }
+
 
