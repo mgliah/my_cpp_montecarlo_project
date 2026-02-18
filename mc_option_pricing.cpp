@@ -74,9 +74,14 @@ int main() {
 
     //Output
 
-    std::cout << "European Call Option Price: " << callPrice << std::endl;
-    std::cout << "European Put Option Price: " << putPrice << std::endl;
+    if (isCall)
+    {
+        std::cout << "European Call Price: " << price << "\n" << std::endl;
+    } else {
+        std::cout << "European Put Price: " << price << "\n" << std::endl;
+    }
 
 }
+
 
 
