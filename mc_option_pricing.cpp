@@ -25,11 +25,11 @@ double putOptionPayoff(double S, double K) {
 // Monte Carlo Simulation Function
 double monteCarloOptionPricer(double S0, double K, double r, double sigma, double T, long long numSimulations, bool isCallOption) {
     double payoffSum = 0.0;
-
+    double Z = generateGaussianNoise(0.0, 1.0);
     for (long long i = 0; i < numSimulations; i++) {
         //Generate random price path -- estimates stock price at the maturity of the option
         //Geometric Brownian motion: Initial price * e^((r - 0.5*sigma^2)T + sigma*sqrt(T)*Z)
-        double ST = S0 * std::exp((r - 0.5 * sigma * sigma) * T + sigma * std::sqrt(T) * generateGaussianNoise(0.0, 1.0)); 
+        double ST = S0 * std::exp((r - 0.5 * sigma * sigma) * T + sigma * std::sqrt(T) * Z); 
 
         //Calculate payoff for this path
         double payoff = isCallOption ? callOptionPayoff(ST, K) : putOptionPayoff(ST, K);
@@ -82,6 +82,7 @@ int main() {
     }
 
 }
+
 
 
 
